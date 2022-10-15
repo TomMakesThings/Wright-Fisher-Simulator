@@ -1,1 +1,1 @@
-# Wrigh Fisher Simulator
+# Wright Fisher Simulator

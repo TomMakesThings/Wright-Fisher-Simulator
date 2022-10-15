@@ -1,1 +1,0 @@
-# Wrigh Fisher Simulator

@@ -10,4 +10,18 @@
 For the haploid model, the effects of introducing positive or negative selection were investigated with the model demonstrating higher average fixation towards alleles with a positive fitness advantage.
 
 ## Linked Loci Simulation
-For the diploid model, three common linkage disequilibrium metrics $D$, $D'$ and $r^{2}$ were evaluated, with $D$ and $r^{2}$ shown to be highly dependent on the haplotype frequencies in the initial population, and $D'$ found to be consistently initialised at 1. Furthermore, the effects of recombination rate and selection on LD were tested with the simulation demonstrating that LD can be broken down faster with higher recombination and negative selection.
+For the diploid model, three common linkage disequilibrium metrics $D$, $D'$ and $r^{2}$ were evaluated, with $D$ and $r^{2}$ shown to be highly dependent on the haplotype frequencies in the initial population, and $D'$ found to be consistently initialised at 1.
+
+<div align="center">
+  <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Initial-r2.png" width=400>
+</div>
+
+Furthermore, the effects of recombination rate and selection on LD were tested with the simulation demonstrating that LD can be broken down faster with higher recombination and negative selection.
+
+<div align="center">
+  <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Diploid-LD-1000.png" width=700>
+</div>
+
+<div align="center">
+  <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Diploid-Selection.png" width=500>
+</div>

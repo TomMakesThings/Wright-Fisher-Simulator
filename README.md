@@ -142,10 +142,16 @@ For the diploid model, the initial values for three common linkage disequilibriu
 <a name="figureB"></a>
 <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Initial-r2.png" width=400>
 
-<sub>Figure (B) Initial distribution of $r^{2}$ for 1000 two-loci Wright-Fisher simulations without selection</sub>
+<sub>Figure (B) Initial distribution of $r^{2}$ for 1000 two-loci Wright-Fisher simulations without selection.</sub>
 
 Furthermore, the effects of recombination rate and selection on LD were tested with the simulation demonstrating that LD can be broken down faster with higher recombination and negative selection.
 
+<a name="figureC"></a>
 <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Diploid-LD-1000.png" width=700>
 
+<sub>Figure (C) Three measures of linkage disequilibrium for different recombination rates. On the left $D$, $D'$ and $r^{2}$ measured per generation are plotted for each simulation, while on the right each LD measured was averaged over all 1,000 simulations.</sub>
+
+<a name="figureD"></a>
 <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Diploid-Selection.png" width=500>
+
+<sub>Figure (D) Bar chart of allele frequency in final generation averaged across 1,000 simulation for different selection coefficients.</sub>

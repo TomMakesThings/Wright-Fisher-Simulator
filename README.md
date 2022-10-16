@@ -1,4 +1,12 @@
-# Wright Fisher Simulator
+<div align="center">
+  <h1><b>Wright-Fisher Simulator</b></h1>
+  <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/61354833?v=4&h=100&w=100&fit=cover&mask=circle&maxage=7d">
+  <p><b>🟢🟢🟢 Code by <a href="https://github.com/TomMakesThings">TomMakesThings</a> 🟢🟢🟢</b></p>
+  <p><b><sub>April 2022</sub></b></p>
+</div>
+
+---
+
 ## About
 <a href="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/main/WrightFisher.ipynb">This Jupyter notebook</a> contains a simulator used to experiment with the classic and modified versions of Wright-Fisher model of genetic drift (see [Results](#results)). The standard Wright-Fisher model simulates a haploid, asexual, panmictic population of size $N$ over $t$ generations for a single loci with two alleles $a$ and $A$. The modified simulator models a diploid population featuring two alleles in linkage disequilibrium and partial recombination ([Figure A](#figureA)).
 

@@ -8,7 +8,7 @@
 ---
 
 # About
-This repository contains a simulator, implemented in a <a href="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/main/WrightFisher.ipynb">Jupyter notebook</a>, to test the effects of selection, recombination and linkage disequilibrium on haploid and diploid versions of the Wright-Fisher model of genetic drift ([Figure A](#figureA)).
+This repository contains a simulator, implemented in a <a href="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/main/WrightFisher.ipynb">Jupyter notebook</a>, to test the effects of selection, recombination and linkage disequilibrium on haploid and diploid versions of the Wright-Fisher model of genetic drift ([Figure A](#figureA)). For the haploid model, the simulator demonstrates that speed and rate of fixation of an allele in a population can be increased through positive selection. For the diploid model, the simulator demonstrates how LD can be broken down faster with higher recombination and negative selection.
 
 ## Wright-Fisher Model Types
 
@@ -121,7 +121,7 @@ For the single loci model, the effects of introducing positive/negative selectio
 
 ## Diploid Wright-Fisher with Recombination
 ### Comparing LD at Initialisation
-LD is the non-random association of different alleles. For the linked loci model, the initial values for three common linkage disequilibrium metrics $D$, $D'$ and $r^{2}$ were evaluated by repeatedly generating an initial population via random sampling 1,000 times. The haplotype frequencies for the first five runs are recorded in [Table B](#tableB), while the distribution of $r^{2}_{1}$ is plotted in [Figure B](#figureB). This demonstrates that $D$ and $r^{2}$ are highly dependent on the haplotype frequencies in the initial population as these measures are calculated based on the frequency of the background allele $A$. Only $D'$ is consistently initialised as 1 suggesting the population is in complete LD. 
+For the linked loci model, the initial values for three common linkage disequilibrium metrics $D$, $D'$ and $r^{2}$ were evaluated by repeatedly generating an initial population via random sampling 1,000 times. The haplotype frequencies for the first five runs are recorded in [Table B](#tableB), while the distribution of $r^{2}_{1}$ is plotted in [Figure B](#figureB). This demonstrates that $D$ and $r^{2}$ are highly dependent on the haplotype frequencies in the initial population as these measures are calculated based on the frequency of the background allele $A$. Only $D'$ is consistently initialised as 1 suggesting the population is in complete LD. 
 
 <a name="tableB"></a>
 <table>
@@ -200,6 +200,7 @@ LD is the non-random association of different alleles. For the linked loci model
 <sub>Figure (B) Initial distribution of $r^{2}$ for 1000 two-loci Wright-Fisher simulations without selection.</sub>
 
 ### Testing Recombination Rates and Selection
+#### Recombination
 For each generation in the diploid simulator, recombinant haplotypes are created between two loci with probability $r$. To test the effects of recombination rate on LD, an initial population was randomly generated giving haplotypes frequencies: $\{AB: 1, Ab: 10, aB: 0, ab: 89\}$. In this case, the singleton $B$ allele occurred on a chromosome with the $A$ allele, and so the haplotype $aB$ initially has frequency zero. These initial haplotype frequencies were consistently used to seed the experiments so that results of changing parameters were comparable and averages could be calculated. 
 
 The simulator was run 1,000 times for $r = 0.05$, $r = 0.01$ and $r = 0.02$ and the LD measures over time plotted in [Figure C](#figureC).  Here the results for each simulation per time point, as well as the average over time are depicted. The average across all simulations demonstrate that for higher $r$, fewer generations are required to break down LD. In real populations, higher recombination rate is expected when two loci are further apart. Therefore this simulation implies that a greater distance between loci would speed up LD decay.
@@ -209,7 +210,10 @@ The simulator was run 1,000 times for $r = 0.05$, $r = 0.01$ and $r = 0.02$ and 
 
 <sub>Figure (C) Three measures of linkage disequilibrium for different recombination rates. On the left $D$, $D'$ and $r^{2}$ measured per generation are plotted for each simulation, while on the right each LD measured was averaged over all 1,000 simulations.</sub>
 
-were tested with the simulation demonstrating that LD can be broken down faster with higher recombination and negative selection.
+#### Selection
+The distribution of average allele frequency after a fixation event occurred for different $s$ is plotted in [Figure D](#figureD). As expected with positive selection towards allele $A$, both its frequency and the frequency of the linked allele $B$ in the final generation is higher than chance. $A$ therefore acts as a driver mutation. Even though the linked allele has no effect on a chromosome's fitness, with a low recombination rate it often hitchhikes when $A$ increases in frequency. This has the effect of increasing LD.
+
+When negative selection is stronger, the $B$ allele frequency is higher than for a weaker negative selection. This can be explained by the occurrence of recombination events forming the haplotype $ab$. As selection is very strong against $AB$ and $Ab$, their frequencies are reduced which has the effect of increasing haplotypes $aB$ and $ab$. The beneficial effect of recombination therefore increases population diversity which explains the reduction of LD with negative selection on allele $A$.
 
 <a name="figureD"></a>
 <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Diploid-Selection.png" width=500>

@@ -8,12 +8,39 @@
 ---
 
 ## About
-<a href="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/main/WrightFisher.ipynb">This Jupyter notebook</a> contains a simulator used to experiment with the classic and modified versions of Wright-Fisher model of genetic drift (see [Results](#results)). The standard Wright-Fisher model simulates a haploid, asexual, panmictic population of size $N$ over $t$ generations for a single loci with two alleles $a$ and $A$. The modified simulator models a diploid population featuring two alleles in linkage disequilibrium and partial recombination ([Figure A](#figureA)).
+<a href="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/main/WrightFisher.ipynb">This Jupyter notebook</a> contains a simulator used to test the effects of selection, recombination and linkage disequilibrium on haploid and diploid versions of the Wright-Fisher model of genetic drift ([Figure A](#figureA)).
 
 <a name="figureA"></a>
 <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Population-Diagrams.png" width=800>
 
 <sub>Figure (A) Diagram demonstrating allele genetic drift over time for the standard Wright-Fisher model (left) and the modified two loci model (right).</sub>
+
+### Haploid Wright-Fisher model
+The classic Wright-Fisher model simulates a haploid, asexual, panmictic population of size $N$ over $t$ generations for a single loci with two alleles $a$ and $A$.
+
+<ol>
+  <li>A population is initialised with an $a$ allele count of $n$.</li>
+  <li>For each preceding generation, the number of alleles $n'$ is sampled independently with replacement from a binomial distribution. Selection can be introduced via
+  the selection coefficient $s \neq 0$. As alleles $a$ and $A$ have relative fitness $w_{a} = 1 + s$ and $w_{A} = 1$, an $s > 0$ gives allele $a$ a fitness advantage,
+  while $s < 0$ means the allele is deleterious and less likely to be passed to the next generation.</li>
+  <li>Drift is modelled as a stochastic process in which the variant allele can be lost if its frequency in a generation reaches zero, fixed if its frequency reaches $N$ or fluctuating for any other $n$. If either extreme is encountered, the simulator will end prematurely as only one allele remains.</li>
+</ol>
+
+
+$n' \sim binomial(\frac{n(1 + s)}{n(1 + s) + N - n}, N)$
+
+### Diploid Wright-Fisher model
+A variant of the Wright-Fisher model was created to model genetic drift between two linked loci $A$ and $B$ under both sexual and asexual reproduction. This simulator models a diploid population featuring two alleles in linkage disequilibrium (LD) with partial recombination.
+
+<ol>
+  <li>The number of individuals with the $A$ allele is initialised through randomly sampling a distribution $S(n)$, while the rest of the population is set to have the
+  $a$ allele.
+  <li>Then a singleton variant allele is introduced at random at site $B$ which can occur on either a chromosome with the $A$ allele or the $a$ allele. This is 
+  equivalent to introducing a new mutation at $B$.</li>
+  <li>For each generation, a new population is filled through selecting haplotypes from the previous generation with probability $1 - r$, and creating recombinant
+  haplotypes with probability $r$. In the case of recombination, two alleles are selected at random with probability proportional to the allele frequencies of the
+  previous generation. All generations are kept at a constant size $N$ and the simulator iterates until an allele at one loci become fixed.</li>
+</ol>
 
 <a name="results"></a>
 ## Results
@@ -75,7 +102,13 @@ For the haploid model, the effects of introducing positive or negative selection
 
 ### Linked Loci Simulation
 #### Comparing LD at Initialisation
-Linkeage disequilibrium (LD) is the non-random association of different alleles. For the diploid model, the initial values for three common linkage disequilibrium metrics $D$, $D'$ and $r^{2}$ were evaluated by repeatedly generating an initial population via random sampling 1,000 times. The haplotype frequencies for the first five runs are recorded in [Table B](#tableB), while the distribution of $r^{2}_{1}$ is plotted in [Figure B](#figureB). This demonstrates that $D$ and $r^{2}$ are highly dependent on the haplotype frequencies in the initial population as these measures are calculated based on the frequency of the background allele $A$. Only $D'$ is consistently initialised as 1 suggesting the population is in complete LD. 
+LD is the non-random association of different alleles. For the diploid model, the initial values for three common linkage disequilibrium metrics $D$, $D'$ and $r^{2}$ were evaluated by repeatedly generating an initial population via random sampling 1,000 times. The haplotype frequencies for the first five runs are recorded in [Table B](#tableB), while the distribution of $r^{2}_{1}$ is plotted in [Figure B](#figureB). This demonstrates that $D$ and $r^{2}$ are highly dependent on the haplotype frequencies in the initial population as these measures are calculated based on the frequency of the background allele $A$. Only $D'$ is consistently initialised as 1 suggesting the population is in complete LD. 
+
+$D_{AB} = p_{AB} - p_{A} p_{B}$
+
+$D' = \frac{D}{D_{max}}$
+
+$\text{if D < 0, } D_{max} = max\{p_{A}p_{B}, (1 - p_{A})(1 - p_{B})\}$
 
 <a name="tableB"></a>
 <table>

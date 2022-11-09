@@ -7,15 +7,16 @@
 
 ---
 
-## About
+# About
 This repository contains a simulator, implemented in a <a href="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/main/WrightFisher.ipynb">Jupyter notebook</a>, to test the effects of selection, recombination and linkage disequilibrium on haploid and diploid versions of the Wright-Fisher model of genetic drift ([Figure A](#figureA)).
+
+## Wright-Fisher Model Types
 
 <a name="figureA"></a>
 <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Population-Diagrams.png" width=800>
 
 <sub>Figure (A) Diagram demonstrating allele genetic drift over time for the standard Wright-Fisher model (left) and the modified two loci model (right).</sub>
 
-## Wright-Fisher Model Types
 ### Haploid Wright-Fisher
 The classic Wright-Fisher model simulates a haploid, asexual, panmictic population of size $N$ over $t$ generations for a single loci with two alleles $a$ and $A$.
 
@@ -43,10 +44,27 @@ A variant of the Wright-Fisher model was created to model genetic drift between 
   previous generation. All generations are kept at a constant size $N$ and the simulator iterates until an allele at one loci become fixed.</li>
 </ol>
 
+## Linkage Disequilibrium
+Linkage disequilibrium (LD) is the non-random association of alleles at different loci. One method to quantify LD between two alleles $A$ and $B$ at different loci is the coefficient of linkage disequilibrium $D$. This is the difference between the frequency of a haplotype for a pair of alleles $A$ and $B$, $p_{AB}$, and the product of the allele frequencies $p_{A} p_{B}$.
+
+$D_{AB} = p_{AB} - p_{A} p_{B}$
+
+The range of potential values for $D_{AB}$ relies on allele frequencies $A$ and $B$, and so it is difficult to compare the level of LD between other pairs of alleles. Therefore it can be normalised to range between -1 to 1, denoted $D'$, by dividing by the maximum difference $D_{max}$ between the observed and expected haplotype frequencies.
+
+$D' = \frac{D}{D_{max}}$
+
+$\text{if D < 0, } D_{max} = max\{p_{A}p_{B}, (1 - p_{A})(1 - p_{B})\}$
+
+$\text{else } D_{max} = min\{p_{A}(1 - p_{A}), (1 - p_{A})p_{B}\}$
+
+Another normalised measure of LD is the genetic correlation $r^{2}$ between pairs of loci. This metric has ranges between 0 and 1.
+
+$r^{2} = \frac{D^{2}}{p_{A}(1 - p_{A}) p_{B}(1 - p_{B})}$
+
 <a name="results"></a>
-## Results
-### Single Site Simulation
-For the haploid model, the effects of introducing positive or negative selection on the genetic drift of an allele with an initial frequency of $n = 1$ were investigated by running the simulator for 1,000 iterations with selection coefficient $s = 0.02$, $s = 0.005$, $s = 0$, $s = -0.005$ and $s = -0.02$. The number of times the allele fixed or was lost was recorded in [Table A](#tableA) with the results showing that higher than average occurrences of fixation occur with positive selection coefficients. This is to be expected as these correspond to situations in which the allele is beneficial and thus confers a positive fitness advantage. By contrast for negative selection coefficients, the fixation rate is lower as the allele is deleterious. When comparing fixation and loss times, fixation on average occurs faster for a higher positive $s$, while loss is slightly quicker for a lower negative $s$.
+# Results
+## Haploid Wright-Fisher
+For the single loci model, the effects of introducing positive/negative selection on genetic drift of an allele with initial frequency $n = 1$ were investigated by running the simulator for 1,000 iterations with selection coefficient $s = 0.02$, $s = 0.005$, $s = 0$, $s = -0.005$ and $s = -0.02$. The number of times the allele fixed or was lost was recorded in [Table A](#tableA), with results showing that higher than average occurrences of fixation occur with positive selection coefficients. This is to be expected as these correspond to situations in which the allele is beneficial and thus confers a positive fitness advantage. By contrast for negative selection coefficients, fixation rate is lower as the allele is deleterious. When comparing fixation and loss times, fixation on average occurs faster for a higher positive $s$, while loss is slightly quicker for a lower negative $s$.
 
 <a name="tableA"></a>
 <table>
@@ -101,15 +119,9 @@ For the haploid model, the effects of introducing positive or negative selection
 </table>
 <sub>Table (A) Summary statistics of the classic Wright-Fisher model with and without selection for 1,000 simulations and population size N = 100. Each time the population is initialised with a singleton allele, n = 1.</sub>
 
-### Linked Loci Simulation
-#### Comparing LD at Initialisation
-LD is the non-random association of different alleles. For the diploid model, the initial values for three common linkage disequilibrium metrics $D$, $D'$ and $r^{2}$ were evaluated by repeatedly generating an initial population via random sampling 1,000 times. The haplotype frequencies for the first five runs are recorded in [Table B](#tableB), while the distribution of $r^{2}_{1}$ is plotted in [Figure B](#figureB). This demonstrates that $D$ and $r^{2}$ are highly dependent on the haplotype frequencies in the initial population as these measures are calculated based on the frequency of the background allele $A$. Only $D'$ is consistently initialised as 1 suggesting the population is in complete LD. 
-
-$D_{AB} = p_{AB} - p_{A} p_{B}$
-
-$D' = \frac{D}{D_{max}}$
-
-$\text{if D < 0, } D_{max} = max\{p_{A}p_{B}, (1 - p_{A})(1 - p_{B})\}$
+## Diploid Wright-Fisher with Recombination
+### Comparing LD at Initialisation
+LD is the non-random association of different alleles. For the linked loci model, the initial values for three common linkage disequilibrium metrics $D$, $D'$ and $r^{2}$ were evaluated by repeatedly generating an initial population via random sampling 1,000 times. The haplotype frequencies for the first five runs are recorded in [Table B](#tableB), while the distribution of $r^{2}_{1}$ is plotted in [Figure B](#figureB). This demonstrates that $D$ and $r^{2}$ are highly dependent on the haplotype frequencies in the initial population as these measures are calculated based on the frequency of the background allele $A$. Only $D'$ is consistently initialised as 1 suggesting the population is in complete LD. 
 
 <a name="tableB"></a>
 <table>
@@ -187,7 +199,7 @@ $\text{if D < 0, } D_{max} = max\{p_{A}p_{B}, (1 - p_{A})(1 - p_{B})\}$
 
 <sub>Figure (B) Initial distribution of $r^{2}$ for 1000 two-loci Wright-Fisher simulations without selection.</sub>
 
-#### Testing Recombination Rates and Selection
+### Testing Recombination Rates and Selection
 For each generation in the diploid simulator, recombinant haplotypes are created between two loci with probability $r$. To test the effects of recombination rate on LD, an initial population was randomly generated giving haplotypes frequencies: $\{AB: 1, Ab: 10, aB: 0, ab: 89\}$. In this case, the singleton $B$ allele occurred on a chromosome with the $A$ allele, and so the haplotype $aB$ initially has frequency zero. These initial haplotype frequencies were consistently used to seed the experiments so that results of changing parameters were comparable and averages could be calculated. 
 
 The simulator was run 1,000 times for $r = 0.05$, $r = 0.01$ and $r = 0.02$ and the LD measures over time plotted in [Figure C](#figureC).  Here the results for each simulation per time point, as well as the average over time are depicted. The average across all simulations demonstrate that for higher $r$, fewer generations are required to break down LD. In real populations, higher recombination rate is expected when two loci are further apart. Therefore this simulation implies that a greater distance between loci would speed up LD decay.

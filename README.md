@@ -1,5 +1,5 @@
 <div align="center">
-  <h1><b>Wright-Fisher Simulator</b></h1>
+  <h1><b>Haploid and Diploid Wright-Fisher Simulator</b></h1>
   <img src="https://images.weserv.nl/?url=avatars.githubusercontent.com/u/61354833?v=4&h=100&w=100&fit=cover&mask=circle&maxage=7d">
   <p><b>🟢🟢🟢 Code by <a href="https://github.com/TomMakesThings">TomMakesThings</a> 🟢🟢🟢</b></p>
   <p><b><sub>April 2022</sub></b></p>
@@ -8,14 +8,15 @@
 ---
 
 ## About
-<a href="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/main/WrightFisher.ipynb">This Jupyter notebook</a> contains a simulator used to test the effects of selection, recombination and linkage disequilibrium on haploid and diploid versions of the Wright-Fisher model of genetic drift ([Figure A](#figureA)).
+This repository contains a simulator, implemented in a <a href="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/main/WrightFisher.ipynb">Jupyter notebook</a>, to test the effects of selection, recombination and linkage disequilibrium on haploid and diploid versions of the Wright-Fisher model of genetic drift ([Figure A](#figureA)).
 
 <a name="figureA"></a>
 <img src="https://github.com/TomMakesThings/Wright-Fisher-Simulator/blob/assets/Images/Population-Diagrams.png" width=800>
 
 <sub>Figure (A) Diagram demonstrating allele genetic drift over time for the standard Wright-Fisher model (left) and the modified two loci model (right).</sub>
 
-### Haploid Wright-Fisher model
+## Wright-Fisher Model Types
+### Haploid Wright-Fisher
 The classic Wright-Fisher model simulates a haploid, asexual, panmictic population of size $N$ over $t$ generations for a single loci with two alleles $a$ and $A$.
 
 <ol>
@@ -29,7 +30,7 @@ The classic Wright-Fisher model simulates a haploid, asexual, panmictic populati
 
 $n' \sim binomial(\frac{n(1 + s)}{n(1 + s) + N - n}, N)$
 
-### Diploid Wright-Fisher model
+### Diploid Wright-Fisher with Recombination
 A variant of the Wright-Fisher model was created to model genetic drift between two linked loci $A$ and $B$ under both sexual and asexual reproduction. This simulator models a diploid population featuring two alleles in linkage disequilibrium (LD) with partial recombination.
 
 <ol>
